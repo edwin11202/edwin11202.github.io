@@ -1,0 +1,307 @@
+:root{
+  --bg:#f8eee6; 
+  --bg2:#fff8f2;
+  --card:#ffffff;
+  --ink:#3b2e2a;
+  --muted:#7c635b;
+  --accent:#d07c52; 
+  --ring:#e4d1c8;
+}
+
+*{box-sizing:border-box;}
+html{
+  scroll-behavior:smooth;
+}
+body{
+  margin:0;
+  font:16px/1.6 system-ui,Arial,sans-serif;
+  color:var(--ink);
+  background: linear-gradient(145deg, var(--bg), var(--bg2));
+}
+
+section{
+  width:min(100%,1200px);
+  margin:0 auto;
+  padding:56px 20px;
+}
+
+/* NAVIGATION */
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  width:100%;
+  background:#f9efe8;
+  padding:10px 20px;
+  border-bottom:1px solid var(--ring);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+#navLinks{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+}
+
+nav a{
+  color:var(--ink);
+  text-decoration:none;
+  font-weight:600;
+  padding:4px 8px;
+}
+
+nav a:hover{
+  color:var(--accent);
+}
+
+.menu-toggle{
+  display:none;          /* hanya muncul di layar kecil */
+  background:none;
+  border:none;
+  font-size:24px;
+  cursor:pointer;
+  margin-right:12px;
+}
+
+/* HOME */
+
+#home{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1.3fr .7fr;   
+  align-items:center;
+  gap:1px;
+  padding:90px 20px 130px;           
+}
+
+#home h1,
+#home p{
+  grid-column:1;
+  max-width:900px;
+}
+
+#home > img{
+  grid-column:2;
+  justify-self:center;
+  align-self:center;
+
+  width:340px;
+  height:340px;
+  border-radius:50%;
+  object-fit:cover;
+  border:6px solid #fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.1);
+  transition:transform .3s ease;
+}
+#home > img:hover{
+  transform: scale(1.05);
+}
+
+#home h1{
+  font-size:clamp(32px,5vw,56px);
+  font-weight:800;
+  margin:0 0 12px;
+}
+#home p{
+  font-size:18px;
+}
+#home p:last-of-type{
+  font-style:italic;
+  color:var(--muted);
+}
+
+/* CARD-LIKE SECTIONS */
+
+#about, #career div, #career li, #hobbies > div, #contact{
+  background:var(--card);
+  border:1px solid var(--ring);
+  border-radius:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  padding:20px;
+}
+
+/* CAREER LIST */
+
+#career ul{
+  list-style:none;
+  padding:0;
+  margin:12px 0 24px;
+}
+#career li{
+  padding-left:40px;
+  position:relative;
+  margin:10px 0;
+}
+#career li::before{
+  content:"🎓";
+  position:absolute;
+  left:12px;
+  top:4px;
+}
+
+/* HOBBIES */
+
+#hobbies > div > img:first-child{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  margin-bottom:6px;
+}
+
+#hobbies > div > div{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  gap:16px;
+  justify-items:center;
+}
+
+#hobbies > div > div img{
+  width:170px;
+  height:170px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid #fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+
+/* FADE-IN ANIMATION (CSS ONLY) */
+
+.fade-in{
+  opacity:0;
+  animation:fadeIn .8s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 840px){
+  body{
+    width:100vw;
+  }
+
+  section{
+    padding:40px 16px;
+  }
+
+  #home{
+    grid-template-columns:1fr;      
+    text-align:center;
+    padding:50px 15px 160px;
+  }
+
+  #home h1,
+  #home p{
+    max-width:none;
+    margin: 4px 0;
+  }
+
+  #home p{
+    line-height:1.3;   
+  }
+  #home > img{
+    grid-column:1;
+    order:-1;                       
+    margin-bottom:20px;
+    width:min(260px, 60vw);
+    height:min(260px, 60vw);
+  }
+}
+
+@media screen and (max-width: 640px){
+
+  #home p{
+    font-size:16px;
+  }
+
+  #hobbies > div > div img{
+    width:min(150px, 40vw);
+    height:min(150px, 40vw);
+  }
+  
+  nav{
+    justify-content:space-between;
+  }
+
+  #navLinks{
+    position:absolute;
+    top:56px;
+    left:0;
+    right:0;
+    background:#f9efe8;
+    border-bottom:1px solid var(--ring);
+    flex-direction:column;
+    gap:10px;
+    padding:10px 0 14px;
+    display:none;                 
+  }
+
+  #navLinks.nav-open{
+    display:flex;                 
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+}
+
+@media screen and (max-width: 480px){
+  nav{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    padding:10px 0;
+    flex-wrap:wrap; 
+  }
+
+  nav a{
+    padding:4px 6px;
+    font-size:15px;
+  }
+
+  section{
+    padding:32px 14px;
+  }
+
+  body{
+    font-size:15px;
+  }
+}
+
+/* BACK TO TOP BUTTON */
+
+#topBtn{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  padding:10px 14px;
+  border:none;
+  border-radius:999px;
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+  display:none;              /* hidden by default */
+  z-index:1000;
+}
+#topBtn:hover{
+  filter:brightness(1.05);
+}
+#topBtn.visible{
+  display:block;             /* JS will toggle this */
+}
